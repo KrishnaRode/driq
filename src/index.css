@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --driq-accent: #38bdf8; /* Precision cyan / sky */
+    --driq-focus: #f59e0b; /* Target amber */
+  }
+
+  html, body {
+    font-family: var(--font-sans);
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #090a0f;
+    color: #f1f5f9;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Safe area utilities for iOS notch & home indicator */
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 12px);
+}
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px);
+}
+.pl-safe {
+  padding-left: max(env(safe-area-inset-left, 0px), 12px);
+}
+.pr-safe {
+  padding-right: max(env(safe-area-inset-right, 0px), 12px);
+}
+
+/* Full dynamic viewport wrapper */
+.h-dvh-screen {
+  height: 100dvh;
+  min-height: 100svh;
+}
+
+/* Subtle situational grid & reticle styling */
+.reticle-corner {
+  stroke-dasharray: 12 40;
+}
+
+/* Custom scrollbars for context panel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Phase 5: Visual Experience Engine Animations & Subtle Glow */
+@keyframes subtle-scan {
+  0% {
+    transform: translateY(0%);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0.05;
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.animate-subtle-scan {
+  animation: subtle-scan 2.4s ease-in-out infinite alternate;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+.animate-dash-flow {
+  animation: dash-flow 1.5s linear infinite;
+}
+
+.filter-luminous-cyan {
+  filter: drop-shadow(0 0 3px rgba(6, 182, 212, 0.6)) drop-shadow(0 0 8px rgba(56, 189, 248, 0.25));
+}
+
+.filter-luminous-white {
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+}
+
+.filter-luminous-amber {
+  filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.6)) drop-shadow(0 0 8px rgba(217, 119, 6, 0.25));
+}
+
+/* Reduced motion preference compliance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-subtle-scan,
+  .animate-pulse-subtle,
+  .animate-dash-flow,
+  .animate-ping {
+    animation: none !important;
+  }
+}
+
